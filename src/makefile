@@ -11,8 +11,8 @@ PROG=sdl_test
 
 all: sdl_text
 
-sdl_text: main.c window.c
-	${CC} -o ${PROG} main.c window.c ${LIBS} ${INCLUDES}
+sdl_text: main.c window.c jeu.c menu.c
+	${CC} -o ${PROG} main.c window.c jeu.c menu.c ${LIBS} ${INCLUDES}
 
 clean:
 	rm -f ${PROG}

@@ -1,11 +1,12 @@
 #include "../header/window.h"
 #include <stdio.h>
 #include "../../../SDL2/include/SDL2/SDL.h"
+#include "../header/jeu.h"
+
 
 //fonction de creation de fenetre, mise en place de tout les trucs importants de SDL (a documenter plus par la suite)
 
 int initialiser_fenetre(){
-  int i; // a enlever
   //initialisation de SDL---------------------------------------------------------------
   if (SDL_Init(SDL_INIT_VIDEO) != 0 ) {
       fprintf(stdout,"Échec de l'initialisation de la SDL (%s)\n",SDL_GetError());
@@ -19,15 +20,16 @@ int initialiser_fenetre(){
       SDL_WINDOWPOS_CENTERED, //y fenetre centré
       1600, //largeur fenetre
       900, //hauteur fenetre, deux valeurs à modifier potentiellement, a voir avec redimensionnement de la fenetre
-      SDL_WINDOW_RESIZABLE //fenetre redimensioable
+      SDL_WINDOW_SHOWN|SDL_WINDOW_RESIZABLE //fenetre redimensioable
     );
     if(pWindow){
-      scanf("%i", &i);
+      //lancement du jeu si fenetre bien crée-------------------------------------------------
+      jeu(pWindow); //on transmet le pointeur de la fenetre pour des utilisations antétieures
       SDL_DestroyWindow(pWindow);
     }else{
       printf("erreur de creation de fenetre\n");
       return -1;
     }
   }
-
+  SDL_Quit();
 }
